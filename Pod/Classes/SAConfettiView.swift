@@ -40,12 +40,12 @@ public class SAConfettiView: UIView {
                   UIColor(red:0.48, green:0.78, blue:0.64, alpha:1.0),
                   UIColor(red:0.30, green:0.76, blue:0.85, alpha:1.0),
                   UIColor(red:0.58, green:0.39, blue:0.55, alpha:1.0)]
-        intensity = 0.5
+        intensity = 0.95
         type = .Confetti
         active = false
     }
     
-    public func startConfetti() {
+    @objc public func startConfetti() {
         emitter = CAEmitterLayer()
         
         emitter.emitterPosition = CGPoint(x: frame.size.width / 2.0, y: 0)
@@ -62,7 +62,7 @@ public class SAConfettiView: UIView {
         active = true
     }
     
-    public func stopConfetti() {
+    @objc public func stopConfetti() {
         emitter?.birthRate = 0
         active = false
     }
@@ -113,7 +113,7 @@ public class SAConfettiView: UIView {
         return confetti
     }
     
-    public func isActive() -> Bool {
+    @objc public func isActive() -> Bool {
         return self.active
     }
 }
