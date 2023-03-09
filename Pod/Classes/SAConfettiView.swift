@@ -11,11 +11,11 @@ import QuartzCore
 public class SAConfettiView: UIView {
     
     public enum ConfettiType {
-        case Confetti
-        case Triangle
-        case Star
-        case Diamond
-        case Image(UIImage)
+        case confetti
+        case triangle
+        case star
+        case diamond
+        case image(UIImage)
     }
     
     var emitter: CAEmitterLayer!
@@ -36,12 +36,12 @@ public class SAConfettiView: UIView {
     
     func setup() {
         colors = [UIColor(red:0.95, green:0.40, blue:0.27, alpha:1.0),
-                  UIColor(red:1.00, green:0.78, blue:0.36, alpha:1.0),
-                  UIColor(red:0.48, green:0.78, blue:0.64, alpha:1.0),
-                  UIColor(red:0.30, green:0.76, blue:0.85, alpha:1.0),
-                  UIColor(red:0.58, green:0.39, blue:0.55, alpha:1.0)]
+            UIColor(red:1.00, green:0.78, blue:0.36, alpha:1.0),
+            UIColor(red:0.48, green:0.78, blue:0.64, alpha:1.0),
+            UIColor(red:0.30, green:0.76, blue:0.85, alpha:1.0),
+            UIColor(red:0.58, green:0.39, blue:0.55, alpha:1.0)]
         intensity = 0.95
-        type = .Confetti
+        type = .confetti
         active = false
     }
     
@@ -72,25 +72,28 @@ public class SAConfettiView: UIView {
         var fileName: String!
         
         switch type {
-        case .Confetti:
+        case .confetti:
             fileName = "confetti"
-        case .Triangle:
+        case .triangle:
             fileName = "triangle"
-        case .Star:
+        case .star:
             fileName = "star"
-        case .Diamond:
+        case .diamond:
             fileName = "diamond"
-        case let .Image(customImage):
+        case let .image(customImage):
             return customImage
         }
-        
+
+
         let path = Bundle(for: SAConfettiView.self).path(forResource: "SAConfettiView", ofType: "bundle")
         let bundle = Bundle(path: path!)
         let imagePath = bundle?.path(forResource: fileName, ofType: "png")
         let url = URL(fileURLWithPath: imagePath!)
-        let data = try? Data(contentsOf: url)
-        if let data = data {
-            return UIImage(data: data)!
+        do {
+            let data = try Data(contentsOf: url)
+            return UIImage(data: data)
+        } catch {
+            print(error)
         }
         return nil
     }
