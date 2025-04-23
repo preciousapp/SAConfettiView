@@ -84,7 +84,7 @@ public class SAConfettiView: UIView {
             return customImage
         }
         
-        if let image = UIImage(named: fileName, in: .module, compatibleWith: nil) {
+        if let image = UIImage(named: fileName, in: Bundle(for: SAConfettiView.self), compatibleWith: nil) {
             return image
         }
         
