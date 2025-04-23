@@ -83,8 +83,11 @@ public class SAConfettiView: UIView {
         case let .image(customImage):
             return customImage
         }
-
-
+        
+        if let image = UIImage(named: fileName, in: .module, compatibleWith: nil) {
+            return image
+        }
+        
         let path = Bundle(for: SAConfettiView.self).path(forResource: "SAConfettiView", ofType: "bundle")
         let bundle = Bundle(path: path!)
         let imagePath = bundle?.path(forResource: fileName, ofType: "png")
