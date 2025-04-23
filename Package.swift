@@ -18,11 +18,20 @@ let package = Package(
         .target(
             name: "SAConfettiView",
             dependencies: [],
-            path: "Pod/Classes", // Source path relative to Package.swift
+            path: "Pod/Classes",
             resources: [
-                // Asset path relative to target path (Pod/Classes)
-                .process("../Assets") 
+                // Process assets for the main target
+                .process("../Assets")
+            ]
+        ),
+        // Create a separate target that matches the exact bundle name your code looks for
+        .target(
+            name: "SAConfettiView.bundle",
+            path: "Pod/Assets",
+            resources: [
+                .process(".")
             ]
         )
     ]
 )
+
